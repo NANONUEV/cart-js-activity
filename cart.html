@@ -23,18 +23,35 @@
 
   <script>
     const addToCartButton = document.querySelector('.add-to-cart');
-    const cart = document.querySelector('.cart ul');
-    let cartTotal = 0;
+const cart = document.querySelector('.cart ul');
+let cartTotal = 0;
 
-    addToCartButton.addEventListener('click', function() {
-      const productName = this.parentNode.querySelector('h2').textContent;
-      const productPrice = parseFloat(this.parentNode.querySelector('p').textContent.replace('$', ''));
-      const cartItem = document.createElement('li');
-      cartItem.textContent = `${productName} - $${productPrice.toFixed(2)}`;
-      cart.appendChild(cartItem);
-      cartTotal += productPrice;
-      document.querySelector('.cart p').textContent = `Total: $${cartTotal.toFixed(2)}`;
-    });
+if (addToCartButton && cart) {
+  addToCartButton.addEventListener('click', function() {
+    const productNameElement = this.parentNode.querySelector('h2');
+    const productPriceElement = this.parentNode.querySelector('p');
+
+    if (productNameElement && productPriceElement) {
+      const productName = productNameElement.textContent;
+      const productPrice = parseFloat(productPriceElement.textContent.replace('$', ''));
+
+      if (!isNaN(productPrice)) {
+        const cartItem = document.createElement('li');
+        cartItem.textContent = `${productName} - $${productPrice.toFixed(2)}`;
+        cart.appendChild(cartItem);
+        cartTotal += productPrice;
+        document.querySelector('.cart p').textContent = `Total: $${cartTotal.toFixed(2)}`;
+      } else {
+        console.error('Product price is not a number');
+      }
+    } else {
+      console.error('Could not find product name or price element');
+    }
+  });
+} else {
+  console.error('Could not find "Add to Cart" button or cart element');
+}
+
   </script>
 </body>
 </html>

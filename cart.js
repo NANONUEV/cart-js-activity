@@ -1,8 +1,13 @@
-//1. Select the "Add to Cart" button
-//2. Select the cart
-//3. Initialize the cart total
-//4. Add a click event listener to the "Add to Cart" button
-//5. Get the product information
-//6. Create a new cart item
-//7. Add the cart item to the cart
-//8. Update the cart total
+const addToCartButton = document.querySelector('.add-to-cart');
+const cart = document.querySelector('.cart ul');
+let cartTotal = 0;
+
+addToCartButton.addEventListener('click', function() {
+  const productName = this.parentNode.querySelector('h2').textContent;
+  const productPrice = parseFloat(this.parentNode.querySelector('p').textContent.replace('$', ''));
+  const cartItem = document.createElement('li');
+  cartItem.textContent = `${productName} - $${productPrice.toFixed(2)}`;
+  cart.appendChild(cartItem);
+  cartTotal += productPrice;
+  document.querySelector('.cart p').textContent = `Total: $${cartTotal.toFixed(2)}`;
+});

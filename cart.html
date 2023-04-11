@@ -5,21 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        const addToCartButton = document.querySelector('.add-to-cart');
-const cart = document.querySelector('.cart ul');
-let cartTotal = 0;
-
-addToCartButton.addEventListener('click', function() {
-  const productName = this.parentNode.querySelector('h2').textContent;
-  const productPrice = parseFloat(this.parentNode.querySelector('p').textContent.replace('$', ''));
-  const cartItem = document.createElement('li');
-  cartItem.textContent = `${productName} - $${productPrice.toFixed(2)}`;
-  cart.appendChild(cartItem);
-  cartTotal += productPrice;
-  document.querySelector('.cart p').textContent = `Total: $${cartTotal.toFixed(2)}`;
-});
-</script>
 </head>
 <body>
     <!-- The product to be added to cart -->
@@ -35,6 +20,21 @@ addToCartButton.addEventListener('click', function() {
     <ul></ul>
     <p>Total: $0.00</p>
   </div>
-  
+
+  <script>
+    const addToCartButton = document.querySelector('.add-to-cart');
+    const cart = document.querySelector('.cart ul');
+    let cartTotal = 0;
+
+    addToCartButton.addEventListener('click', function() {
+      const productName = this.parentNode.querySelector('h2').textContent;
+      const productPrice = parseFloat(this.parentNode.querySelector('p').textContent.replace('$', ''));
+      const cartItem = document.createElement('li');
+      cartItem.textContent = `${productName} - $${productPrice.toFixed(2)}`;
+      cart.appendChild(cartItem);
+      cartTotal += productPrice;
+      document.querySelector('.cart p').textContent = `Total: $${cartTotal.toFixed(2)}`;
+    });
+  </script>
 </body>
 </html>
